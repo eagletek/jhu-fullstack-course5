@@ -1,11 +1,12 @@
 (function(){
 angular.module("LunchCheckerApp", [])
-.controller("LunchCheckController", lunchCheck )
+.controller("LunchCheckController", LunchCheckController)
 
 LunchCheckController.$inject = ["$scope", "$filter"];
 
-function lunchCheck($scope, $filter){
+function LunchCheckController($scope, $filter){
   $scope.lunch_menu = "";
+  $scope.validation_class = "";
   $scope.output_message = "";
   $scope.validateLunchSize = function(){
     var food_items = $scope.lunch_menu.split(",")
@@ -15,7 +16,22 @@ function lunchCheck($scope, $filter){
     });
 
     // TODO: Calculate correct output messages
-    $scope.output_message = food_items.length;
+    switch (food_items.length) {
+      case 0:
+        $scope.output_message = "Please enter data first!";
+        $scope.validation_class = "has-error";
+        break;
+      case 1:
+      case 2:
+      case 3:
+        $scope.output_message = "Enjoy!";
+        $scope.validation_class = "has-success";
+        break;
+      default:
+        $scope.output_message = "Too much!";
+        $scope.validation_class = "has-success";
+        break;
+    }
   };
 };
 
