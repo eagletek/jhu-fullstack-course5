@@ -2,7 +2,7 @@
 angular.module("NarrowItDownApp", [])
 .controller("NarrowItDownController", NarrowItDownController)
 .service("MenuSearchService", MenuSearchService)
-.directive("foundItems", foundItems);
+.directive("foundItems", FoundItems);
 
 NarrowItDownController.$inject = ["MenuSearchService"]
 function NarrowItDownController(MenuSearchService) {
