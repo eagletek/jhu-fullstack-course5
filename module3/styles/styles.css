@@ -3,10 +3,8 @@ h1 {
 }
 input[type="text"] {
   width: 200px;
-  float: left;
 }
 .narrow-button {
-  float: left;
   margin-left: 10px;
 }
 .loader {
@@ -49,4 +47,42 @@ input[type="text"] {
     -webkit-transform: rotate(360deg);
     transform: rotate(360deg);
   }
+}
+
+.menu-items {
+  margin-top: 20px;
+}
+
+.pill {
+  height: 40px;
+  border-radius: 20px;
+  font-size: .8em;
+  padding: 3px 12px;
+  background: #500;
+}
+
+.menu-item {
+  position: relative;
+  border: 1px solid #999;
+  background: #990000;
+  height: 250px;
+  color: #eee;
+}
+.menu-item .pill {
+  margin-right: 15px;
+}
+.menu-item h4 {
+  line-height: 40px;
+  border-bottom: 3px solid #550000;
+}
+.menu-item .description {
+  font-size: 1.2em;
+}
+.menu-item .description::first-letter {
+  text-transform: uppercase;
+}
+.menu-item .form-group {
+  position: absolute;
+  bottom: 0px;
+  right: 15px;
 }
