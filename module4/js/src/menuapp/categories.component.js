@@ -6,7 +6,8 @@ angular.module('MenuApp')
   restrict: 'E',
   templateUrl: 'js/src/menuapp/templates/categories.template.html',
   bindings: {
-    categories: '<'
+    categories: '<',
+    selected: '<?'
   }
 });
 

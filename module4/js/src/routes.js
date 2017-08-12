@@ -33,13 +33,20 @@ function RoutesConfig($stateProvider, $urlRouterProvider) {
     }
   })
 
-  .state('menuCategories.category', {
-    url: '/{shortName}',
+  .state('category', {
+    url: '/menu/categories/{shortName}',
     templateUrl: 'js/src/menuapp/templates/category.template.html',
-    controller: "CategoryController as category",
+    controller: "CategoryController as menu",
     resolve: {
-      category: ['MenuDataService', function (MenuDataService) {
-        return MenuDataService.getItemsForCategory(shortName);
+      items: ['MenuDataService', '$stateParams', function (MenuDataService, $stateParams) {
+        return MenuDataService.getItemsForCategory($stateParams.shortName).then(function(response){
+          return response.data;
+        });
+      }],
+      categories: ['MenuDataService', function (MenuDataService) {
+        return MenuDataService.getAllCategories().then(function(response){
+          return response.data;
+        });
       }]
     }
   });

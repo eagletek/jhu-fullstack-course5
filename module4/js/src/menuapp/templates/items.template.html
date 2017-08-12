@@ -1,0 +1,7 @@
+<div class="row menu-items">
+  <div class="menu-item col-md-4" ng-repeat="item in $ctrl.items">
+    <h4><span class="pill">{{item.short_name}}</span>{{item.name}}</h4>
+    <p class="description">{{item.description}}</p>
+    <p class="price">{{item.price_large.toFixed(2)}}</p>
+  </div>
+</div>
