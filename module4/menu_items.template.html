@@ -1,0 +1,10 @@
+<div class="row menu-items">
+  <div class="alert alert-danger" ng-if="list.searchClicked && list.items.length == 0">Nothing found!</div>
+  <div class="col-md-4 menu-item" ng-repeat="item in list.items">
+    <h4><span class="pill">{{item.short_name}}</span>{{item.name}}</h4>
+    <p class="description">{{item.description}}</p>
+    <div class="form-group remove-button">
+      <button class="btn btn-default" ng-click="list.removeItem({index: $index});">Don't want this one!</button>
+    </div>
+  </div>
+</div>
