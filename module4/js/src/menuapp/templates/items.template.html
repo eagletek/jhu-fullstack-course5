@@ -2,6 +2,11 @@
   <div class="menu-item col-md-4" ng-repeat="item in $ctrl.items">
     <h4><span class="pill">{{item.short_name}}</span>{{item.name}}</h4>
     <p class="description">{{item.description}}</p>
-    <p class="price">{{item.price_large.toFixed(2)}}</p>
+    <p class="prices">
+      <span class="price">{{item.price_large.toFixed(2)}}</span>
+      <span class="units">{{item.large_portion_name}}</span><span ng-if="item.price_small">,
+      <span class="price">{{item.price_small.toFixed(2)}}</span>
+      <span class="units">{{item.small_portion_name}}</span></span>
+    </p>
   </div>
 </div>
