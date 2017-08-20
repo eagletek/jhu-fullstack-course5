@@ -1,22 +1,27 @@
-function () {
+(function () {
 "use strict";
 
 angular.module('public')
-.controller('SignUpController', UserInfoController);
+.controller('SignUpController', SignUpController);
 
 SignUpController.$inject = ['UserService', 'MenuService'];
 function SignUpController(UserService, MenuService) {
   var $ctrl = this;
-  $ctrl.user = UserService.user;
-  $ctrl.doSignUp = function() {
+  $ctrl.userData = {};
 
-    var favDish = MenuService.getMenuItem(item_short_name);
-    if favDish {
-      UserService.saveUserData(firstName, lastName, email, phone, favDish);
-    }
-    else {
-      // Display error for favorite dish selection
-    }
+  $ctrl.doSignUp = function() {
+    MenuService.getMenuItem($ctrl.userData.dishShortName).then(function(menuItem){
+      var favDish = menuItem;
+      UserService.saveUserData($ctrl.userData.firstName,
+        $ctrl.userData.lastName,
+        $ctrl.userData.email,
+        $ctrl.userData.phone,
+        favDish);
+      $ctrl.success = true;
+    })
+    .catch(function(error) {
+      $ctrl.favDishError = "No such menu number exists."
+    });
   };
 }
 

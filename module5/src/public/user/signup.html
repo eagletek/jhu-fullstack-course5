@@ -1,38 +1,80 @@
 <div class="container">
   <h2 class="text-center">Sign Up for our Newsletter!</h2>
-  <form class="form-horizontal">
-    <div class="form-group">
+  <form class="form-horizontal" name="signupForm" novalidate>
+    <div class="form-group {{(signupForm.firstName.$invalid && signupForm.firstName.$touched) ? 'has-error' : ''}}">
       <label for="inputFirstName" class="col-sm-2 control-label">First Name</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputFirstName" placeholder="Your first name">
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="inputFirstName"
+          name="firstName"
+          placeholder="Your first name"
+          ng-model="signUpCtrl.userData.firstName"
+          required>
+      </div>
+      <div class="col-sm-4">
+        <span ng-if="signupForm.firstName.$error.required && signupForm.firstName.$touched" class="help-block">First name is required</span>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group {{(signupForm.lastName.$invalid && signupForm.lastName.$touched) ? 'has-error' : ''}}">
       <label for="inputLastName" class="col-sm-2 control-label">Last Name</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputLastName" placeholder="Your last name">
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="inputLastName"
+          name="lastName"
+          placeholder="Your last name"
+          ng-model="signUpCtrl.userData.lastName"
+          required>
+      </div>
+      <div class="col-sm-4">
+        <span ng-if="signupForm.lastName.$error.required && signupForm.lastName.$touched" class="help-block">Last name is required</span>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group {{(signupForm.email.$invalid && signupForm.email.$touched) ? 'has-error' : ''}}">
       <label for="inputEmail" class="col-sm-2 control-label">Email</label>
-      <div class="col-sm-10">
-        <input type="email" class="form-control" id="inputEmail" placeholder="Your email address">
+      <div class="col-sm-6">
+        <input type="email" class="form-control" id="inputEmail"
+          name="email"
+          placeholder="Your email address"
+          ng-model="signUpCtrl.userData.email"
+          required>
+      </div>
+      <div class="col-sm-4">
+        <span ng-if="signupForm.email.$invalid && signupForm.email.$touched" class="help-block">Must be a valid email address: handle@domain format</span>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group {{(signupForm.phone.$invalid && signupForm.phone.$touched) ? 'has-error' : ''}}">
       <label for="inputPhone" class="col-sm-2 control-label">Phone Number</label>
-      <div class="col-sm-10">
-        <input type="phone" class="form-control" id="inputPhone" placeholder="Your phone number">
+      <div class="col-sm-6">
+        <input type="phone" class="form-control" id="inputPhone"
+          name="phone"
+          placeholder="Your phone number"
+          ng-model="signUpCtrl.userData.phone"
+          required
+          pattern="(\d{3})-(\d{3})-(\d{4})">
+      </div>
+      <div class="col-sm-4">
+        <span ng-if="signupForm.phone.$invalid && signupForm.phone.$touched" class="help-block">Must be a valid phone number: ###-###-#### format</span>
       </div>
     </div>
-    <div class="form-group">
+    <div class="form-group {{(signupForm.favDish.$invalid && signupForm.favDish.$touched) || signUpCtrl.favDishError ? 'has-error' : ''}}">
       <label for="inputFavDish" class="col-sm-2 control-label">Favorite Dish</label>
-      <div class="col-sm-10">
-        <input type="text" class="form-control" id="inputFavDish" placeholder="Your favorite menu item ID">
+      <div class="col-sm-6">
+        <input type="text" class="form-control" id="inputFavDish"
+          name="favDish"
+          placeholder="Your favorite menu item ID"
+          ng-model="signUpCtrl.userData.dishShortName"
+          required>
+      </div>
+      <div class="col-sm-4">
+        <span ng-if="signupForm.favDish.$error.required && signupForm.favDish.$touched" class="help-block">Favorite dish menu ID is required</span>
+        <span ng-if="signUpCtrl.favDishError" class="help-block">{{signUpCtrl.favDishError}}</span>
       </div>
     </div>
     <div class="text-center">
-      <button class="btn btn-success">Sign-Up!</button>
+      <button class="btn btn-success"
+        ng-disabled="signupForm.$invalid"
+        ng-click="signUpCtrl.doSignUp()">Sign-Up!</button>
     </div>
   </form>
+  <div class="text-center" ng-if="signUpCtrl.success">
+    <h3>Your information has been saved!</h3>
+  </div>
 </div>
