@@ -113,6 +113,15 @@ h3.menu-item-title {
 }
 /* END SINGLE CATEGORY PAGE */
 
+/* User Info Page */
+.user-data {
+  font-size: 1.5em;
+}
+.fav-dish {
+  margin-top: 10px;
+}
+
+/* END USER INFO PAGE */
 
 /********** Large devices only **********/
 @media (min-width: 1200px) {

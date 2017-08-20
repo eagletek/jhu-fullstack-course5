@@ -11,15 +11,28 @@ angular.module('common')
 LoadingController.$inject = ['$rootScope'];
 function LoadingController ($rootScope) {
   var $ctrl = this;
-  var listener;
+  var cancellers = [];
 
   $ctrl.$onInit = function() {
     $ctrl.show = false;
-    listener = $rootScope.$on('spinner:activate', onSpinnerActivate);
+    var cancel = $rootScope.$on('spinner:activate', onSpinnerActivate);
+    cancellers.push(cancel);
+    cancel = $rootScope.$on('$stateChangeError',
+    function(event, toState, toParams, fromState, fromParams, error){
+      console.log("Event:" + event);
+      console.log("toState: " + toState);
+      console.log("toParams: " + toParams);
+      console.log("fromState: " + fromState);
+      console.log("fromParams: " + fromParams);
+      console.log("error: " + error);
+    });
+    cancellers.push(cancel);
   };
 
   $ctrl.$onDestroy = function() {
-    listener();
+    cancellers.forEach(function(cancel){
+      cancel();
+    });
   };
 
   function onSpinnerActivate(event, data) {

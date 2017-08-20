@@ -1,0 +1,29 @@
+<div class="container">
+  <div ng-hide="userInfoCtrl.user" class="text-center">
+    <h2>Not Signed Up Yet</h2>
+    <button class="btn btn-default" ui-sref="public.signup">Sign Up Now!</button>
+  </div>
+
+  <div ng-if="userInfoCtrl.user" class="text-center">
+    <h2>Registered User</h2>
+    <hr/>
+    <div class="row user-data">
+      <div class="col-md-12">
+        {{userInfoCtrl.user.lastName}}, {{userInfoCtrl.user.firstName}}
+      </div>
+      <div class="col-md-12">
+        {{userInfoCtrl.user.phone}}
+      </div>
+      <div class="col-md-12">
+        {{userInfoCtrl.user.email}}
+      </div>
+      <div class="col-md-12">
+        Favorite Dish: {{userInfoCtrl.user.favDish.short_name}}
+      </div>
+    </div>
+    <div class="row fav-dish">
+      <div class="col-md-3"></div>
+      <menu-item menu-item="userInfoCtrl.user.favDish"></menu-item>
+    </div>
+  </div>
+</div>
